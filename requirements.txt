@@ -1,5 +1,4 @@
 ipykernel
-pip-chill
 scikit-learn
 seaborn
 tensorflow
