@@ -1,4 +1,4 @@
 ipykernel
 scikit-learn
-seaborn
 tensorflow
+seaborn
