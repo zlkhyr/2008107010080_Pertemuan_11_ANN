@@ -1,109 +1,51 @@
-# Proyek Pertama Machine Learning Terapan - *Car Price Prediction*
-**Dibuat oleh Aksel E**
+# Predict whether someone is at high risk of a heart attack or not - *Artificial Neural Networks* (ANN) vs *Support Vector Machine* (SVM)
+**Oleh Zul Akhyar**
 
-Berikut merupakan Proyek Pertama mengenai *Predictive Analysis* untuk memprediksi harga mobil di Polandia.
+Berikut merupakan Proyek membangun model untuk memprediksi apakah seseorang memiliki kemungkinan serangan jantung yang tinggi atau tidak
 
 ## Domain Proyek
 ### Latar Belakang
 <br>
-<div><img src="https://images.pexels.com/photos/210182/pexels-photo-210182.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"></div>
+<div><img src="https://www.lenmed.co.za/wp-content/uploads/How-do-you-know-if-you-are-having-a-heart-attack.png"></div>
 <br>
 
-Gambar 1. Kumpulan Kendaraan di Jalanan Sore Hari
+Deteksi dini untuk serangan jantung sangatlah penting. seperti, perawatan yang lebih baik, dan penurunan biaya kesehatan. Dengan mengidentifikasi individu berisiko tinggi secara dini, langkah-langkah pencegahan dapat diterapkan untuk mengurangi kemungkinan serangan jantung. Ini tidak hanya meningkatkan kesehatan individu, tetapi juga memiliki dampak positif pada kesehatan masyarakat secara keseluruhan.
 
-Ditengah kondisi zaman yang semakin berkembang pesat, kebutuhan setiap manusia pun akan semakin bertambah demi memenuhi kebutuhan harian. Salah satu kebutuhan yang dibutuhkan banyak orang ialah kendaraan. Banyak orang lebih memilih mempunyai kendaraan berupa mobil dikarenakan memiliki kenyamanan dan fungsionalitas yang lebih baik. Dengan melihat harga mobil yang semakin tinggi, beberapa orang lebih memilih membeli mobil dengan kondisi bekas dikarenakan harga yang lebih murah.
-
-*Machine Learning* adalah cabang dari ilmu data yang berfokus pada pembuatan sistem yang dapat mempelajari dan membuat prediksi berdasarkan data. Dalam hal memprediksi harga mobil, dapat dibuat sebuah model *Machine Learning* yang dapat digunakan untuk mempelajari data harga mobil dan faktor-faktor yang mempengaruhinya. Kemudian, model yang dibuat ini dapat membuat prediksi harga mobil baru berdasarkan data yang diberikan. Ini sangat berguna karena memungkinkan untuk membuat estimasi harga yang akurat dan cepat dibandingkan dengan metode manual.
-
-## *Business Understanding*
-
-### *Problem Statements*
-Dengan melihat latar belakang tersebut, terdapat beberapa masalah yang didapat:
-- Bagaimana melakukan pemrosesan data untuk membuat data yang baik dan dapat digunakan untuk melatih model?
-- Fitur apa yang berpengaruh terhadap harga mobil?
-- Model algoritma apa yang lebih baik dan memiliki akurasi yang tinggi untuk memprediksi harga mobil?
-
-### *Goals*
-Berikut beberapa solusi yang dapat dilakukan untuk menjawab pertanyaan di atas:
-- Melakukan pembersihan data dengan baik hingga dapat digunakan untuk melatih model.
-- Mempelajari dan melihat korelasi data agar mendapatkan fitur yang berpengaruh terhadap harga mobil.
-- Mencoba dan membandingkan beberapa model algoritma dalam hal memprediksi harga mobil.
-
-### *Solution statements*
-- Melakukan analisis data dengan sistem *Univariate Analysis* dan *Multivariate Analysis* untuk melihat korelasi antar data. Gunakan juga beberapa fitur seperti *Heat Map* untuk memastikan tingkat korelasi antar data.
-- Menggunakan dan membandingkan beberapa model algoritma (*K-Nearest Neighbor*, *Random Forest*, dan *AdaBoost*) serta mengubah nilai *Hyper Parameter* guna mencapai nilai akurasi yang maksimal.
+Disini saya akan membuat dua model untuk memprediksi risiko serangan jantung: satu menggunakan **Artificial Neural Networks (ANN)** dan yang lainnya menggunakan **Support Vector Machine (SVM)**. Setelah kedua model selesai, saya akan membandingkan akurasi keduanya untuk menentukan model mana yang lebih baik dalam memprediksi risiko serangan jantung.
 
 ## *Data Understanding*
-Data yang digunakan dalam proyek ini merupakan data harga mobil di Polandia dengan beberapa karakteristik dari mobil tersebut. Dalam *dataset* ini, terdapat sekitar 118 ribu data dengan 10 kolom didalamnya. Data ini dapat diunduh dari situs Kaggle.
+Data yang digunakan disini adalah data yang berisi informasi terkait serangan jantung yang didapat dari kaggle
 
-*Link* menuju data: [Car Price in Poland](https://www.kaggle.com/datasets/aleksandrglotov/car-prices-poland)
+*Link* data: [Disini](https://www.kaggle.com/datasets/rashikrahmanpritom/heart-attack-analysis-prediction-dataset)
 
-### Berikut merupakan beberapa kolom yang terdapat dalam *dataset* *Car Price in Poland*:
-- mark : Merupakan merek dari mobil.
-- model : Merupakan model dari merek mobil yang tercantum dalam kolom sebelumnya.
-- generation_name : Merupakan nama generasi dari model yang tercantum dalam kolom sebelumnya.
-- year : Berupa tahun berapa mobil tersebut diproduksi.
-- mileage : Berupa seberapa jauh mobil tersebut telah digunakan dalam satuan Kilometer.
-- vol_engine : Berupa seberapa besar kapasitas mesin yang digunakan dalam mobil tersebut.
-- fuel : Merupakan jenis bahan bakar yang digunakan mobil tersebut.
-- city : Merupakan kota asal mobil tersebut digunakan.
-- province : Merupakan provinsi asal mobil tersebut digunakan.
-- price : Harga mobil dalam satuan Polish Zloty.
+### Berikut merupakan beberapa kolom yang terdapat dalam dataset:
+1. **Age**: Age of the patient.
+2. **Sex**: Gender of the patient.
+3. **exang**: Exercise induced angina (1 = yes; 0 = no).
+4. **ca**: Number of major vessels (0-3).
+5. **cp**: Chest pain type:
+   - Value 1: Typical angina
+   - Value 2: Atypical angina
+   - Value 3: Non-anginal pain
+   - Value 4: Asymptomatic
+6. **trtbps**: Resting blood pressure (in mm Hg).
+7. **chol**: Cholesterol level in mg/dl fetched via BMI sensor.
+8. **fbs**: Fasting blood sugar > 120 mg/dl (1 = true; 0 = false).
+9. **rest_ecg**: Resting electrocardiographic results:
+   - Value 0: Normal
+   - Value 1: Having ST-T wave abnormality (T wave inversions and/or ST elevation or depression of > 0.05 mV)
+   - Value 2: Showing probable or definite left ventricular hypertrophy by Estes' criteria
+10. **thalach**: Maximum heart rate achieved.
+11. **target**: Indicates the likelihood of a heart attack:
+    - 0 = Less chance of heart attack
+    - 1 = More chance of heart attack
 
-Dari 10 kolom yang ada dalam *dataset*, kolom model dan generation_name tidak digunakan karena dapat digantikan dengan kolom year dan vol_engine serta tidak memiliki korelasi dengan harga mobil.
-
-Untuk melihat korelasi antar kolom dengan harga mobil, digunakan 2 analisis berikut:
-
-### *Univariate Analysis*:
-Ini merupakan analisis yang digunakan untuk melihat jenis yang ada dalam satu kolom saja. Dalam analisis ini, data numerikal dan data kategorikal akan dipisahkan.
+### *EDA (Exploratory Data Analysis)*:
 - **Data Kategorikal**
-  - **mark**
-  
-    Terdapat 23 jenis merek dalam kolom mark ini, dengan merek *Audi* dan *Opel* yang memiliki data terbanyak sebesar masing-masing ~10%.
     
     <img width="288" alt="image" src="https://user-images.githubusercontent.com/116968275/216391713-709812c9-146b-4e2b-a8b9-482f57f9d7cd.png">
     
     Gambar 2. Visualisasi Penyebaran Data pada Kolom *mark*
-
-  - **fuel**
-  
-    Terdapat 6 jenis bahan bakar yang digunakan dalam *dataset* ini dengan pemakaian bahan bakar terbanyak ialah *Gasoline* dan *Diesel*.
-    
-    <img width="290" alt="image" src="https://user-images.githubusercontent.com/116968275/216534073-f85ba1bd-fce6-40b7-8d80-1966e9e36eaf.png">
-    
-    Gambar 3. Visualisasi Penyebaran Data pada Kolom *fuel*
-
-    Melihat pemerataan data yang kurang baik serta masih kurang banyak pemakaian bahan bakar selain *Gasoline* dan *Diesel*, maka data mobil yang menggunakan bahan bakar selain *Gasoline* dan *Diesel* akan dihapus.
-
-    <img width="289" alt="image" src="https://user-images.githubusercontent.com/116968275/216534162-d36b171a-e890-44cf-af6b-f4ff08b839d0.png">
-    
-    Gambar 4. Visualisasi Data *Gasoline* dan *Diesel* pada Kolom *mark*
-
-  - **city**
-
-    Dalam kolom *city* ini, terdapat 4224 kota yang terdaftar dalam *dataset*. Dengan melihat jumlah kota yang sangat banyak ini, maka kolom *city* akan dihapus dan digantikan oleh kolom *province* yang dapat menggantikan fungsi kolom *city*.
-    
-    <img width="239" alt="image" src="https://user-images.githubusercontent.com/116968275/216534966-9a692248-f3ec-4c42-9057-01fcf21cac1d.png">
-    
-    Gambar 5. Daftar Nama Koya yang Terdaftar pada Kolom *city*
-   
-    <img width="288" alt="image" src="https://user-images.githubusercontent.com/116968275/216535042-8f34df7a-9520-4d9b-882c-6270ae76ccb9.png">
-    
-    Gambar 6. Visualisasi Penyebaran pada Data Kolom *city*
-
-  - **province**
-
-    Dalam kolom *province*, terdapat 22 provinsi yang terdaftar. Jika kita lihat kembali, terdapat satu provinsi dengan nama "(" yang dimana data tersebut sudah pasti berupa *error*.
-    
-    <img width="289" alt="image" src="https://user-images.githubusercontent.com/116968275/216535766-073d1039-6384-4b06-99e4-082e96944fe7.png">
-    
-    Gambar 7. Visualisasi Penyebaran pada Data Kolom *province*
-
-    Dengan melihat pemerataan data yang kurang baik juga, maka provinsi dengan jumlah data dibawah 2000 akan dihapus.
-    
-    <img width="289" alt="image" src="https://user-images.githubusercontent.com/116968275/216535927-62128eb3-c71a-4ac1-a7fc-0134f995a0a6.png">
-    
-    Gambar 8. Visualisasi Penyebaran pada Data Kolom *province* Setelah Data Dirapihkan 
 
 - **Data Numerikal**
   
